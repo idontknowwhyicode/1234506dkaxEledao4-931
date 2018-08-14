@@ -25,8 +25,8 @@ module.exports.run = async (bot, message, args) => {
                         }, 3000);
                     });
             });
-    }
     } else message.reply("You can't use the close command outside of a ticket channel.");
+    } 
 function isCommand(message) {
     return message.content.toLowerCase().startsWith(prefix);
 }
