@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
             msg.delete(5000)
           })
     }
-    if(cName.startsWith("support")) {
+    if(cName.startsWith("editthis")) {
 
     const reason = message.content.split(" ").slice(1).join(" ");
     if (message.guild.channels.exists("name", `ticket-${message.author.username.toLowerCase()}`)) return message.channel.send(`You already have a ticket open`);
