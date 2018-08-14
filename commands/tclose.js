@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     if (isCommand(message, "close")) {
     let channel = message.channel;
     let cName = channel.name;
-    if(!cName.startsWith("appeal-") || !cName.startsWith("apply-") || !cName.startsWith("ticket-")) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
             .then((m) => {
@@ -26,7 +26,8 @@ module.exports.run = async (bot, message, args) => {
                     });
             });
     }
-
+    } else { 
+	    message.channel.send(`You can't use the close command outside of a ticket channel.`); }
 function isCommand(message) {
     return message.content.toLowerCase().startsWith(prefix);
 }
