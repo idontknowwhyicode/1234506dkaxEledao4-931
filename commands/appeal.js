@@ -1,111 +1,87 @@
-const Discord = require("discord.js");
+const Discord = require("discord.js")
 
-module.exports.run = async (bot, message) => {
-    let messageArray = message.content.toLowerCase().split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let sort = args.join(" ");
+
+
+module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
+    let cName = channel.name;
+    if(!cName.startsWith("commands")) { 
+        message.reply("You can't use -new here!")
+        .then(msg => {
+            msg.delete(5000)
+          })
+    }
+    if(cName.startsWith("commands")) {
 
-    if(args[0] !== "mute" && args[0] !== "ban" && args[0] !== "tempban"){
-        return message.channel.send("Available appeals are: Ban, Mute, Tempban!\nUsage: -appeal [appeal sort]")
-     }
-     
-    function createChannel() {
-        message.guild.createChannel(`appeal-${message.author.username}`, "text").then(channel => {
+    if (message.guild.channels.exists("name", `appeal-${message.author.username.toLowerCase()}`)) return message.channel.send(`You already have a ticket open`);
+
+    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
         let category = message.guild.channels.find("name", "🎫 Tickets");
         if(category) {
-            channel.setParent(category)
+            c.setParent(category)
              .then(updated => console.log(`Set the category of ${channel.name} to ${channel.parent.name}`))
             .catch(console.error);
-           } else message.reply("Category niet vindbaar.")
+           } else message.reply("Category not able to find.")
            .then(msg => {
             msg.delete(5000)
           })
-            let role = message.guild.roles.find("name", "Support Team");
-            let role2 = message.guild.roles.find("name", "@everyone");
-            channel.overwritePermissions(role, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true,
-                READ_MESSAGE_HISTORY: true
-            });
+        let role = message.guild.roles.find("name", "editrolenamehere");
+        let role2 = message.guild.roles.find("name", "@everyone");
 
-            channel.overwritePermissions(role2, {
-                SEND_MESSAGES: false,
-                READ_MESSAGES: false,
-                READ_MESSAGE_HISTORY: false
-            });
-            channel.overwritePermissions(message.author, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true,
-                READ_MESSAGE_HISTORY: true
-            });
 
-            let tcreateembed = new Discord.RichEmbed()
-            .setTitle("AstroGalaxy Support")
-            .setColor("#ffffff")
-            .addField(`${sort} Appeal Ticket`,`${channel}`)
-            .addField(`Waar is mijn appeal ticket?`, `Klik op ${channel}`)
-            .setTimestamp()
-            .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
-          
-            message.channel.send({embed: tcreateembed});
-
-            if (args[0] == "ban") {
-                let appealone = new Discord.RichEmbed()
-                    .setColor("#ffffff")
-                    .setTitle(`Hey ${message.author.username}!`)
-                    .setDescription(`
-                    ** »Dit is het formaat voor uw appeal. Als u in appeal gaat, verwachten we dat u al deze vragen zult beantwoorden. «** \n \n- Wat is de naam van uw Minecraft IGN? \n- Waarom bent u uit ForestMC verbannen? \n- Wie heeft u verbannen? \n- je bent verbannen voor meerdere waarschuwingen, waarom zouden we je unbannen? \n- Als je verbannen werd voor hacken, waarom zouden we je uitbannen? \n- Als je om een andere reden bent gebanned, vertel ons dan waarom we je moeten ontbinden?\n
-- Als u hackt, heeft u uw hacks dan gedeïnstalleerd? \n- Hebt u ooit gedoneerd op de server, zo ja, wat heeft u gekocht? \n- Bent u ooit eerder gestraft op de server? \n
-- Bent u ooit eerder personeel op de server geweest, zo ja, in welke rank was je? \n- Is er nog iets dat we moeten weten?`)
-                    .setTimestamp()
-                    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
-                channel.send({embed: appealone});
-            }
-
-            if (args[0] == "tempban") {
-                let appealtwo = new Discord.RichEmbed()
-                    .setColor("#ffffff")
-                    .setTitle(`Hey ${message.author.username}!`)
-                    .setDescription(`
-             ** »Dit is het formaat voor uw appeal. Wanneer u in appeal gaat, verwachten we dat u al deze vragen zult beantwoorden. «** \n \n- Wat is de naam van uw Minecraft IGN? \n
-- Hoe lang bent u tijdelijk verbannen? \n- Waarom was u tijdelijk verbannen op ForestMC? \n- Wie heeft je tijdelijk verbannen? \n
-- Als je voor meerdere delicten tijdelijk bent geblokkeerd, waarom zouden we je uitbannen? \n- Heb je ooit gedoneerd op de server, zo ja, wat heb je gekocht ? \n- Bent u ooit eerder op de server gestraft? \n- Bent u ooit eerder personeel op de server geweest, zo ja, in welke rang was u? \n- Is er nog iets dat we moeten weten? \n`)
-                    .setTimestamp()
-                    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
-                channel.send({embed: appealtwo});
-            }
-
-            if (args[0] == "mute") {
-                let appealthree = new Discord.RichEmbed()
-                    .setColor("#ffffff")
-                    .setTitle(`Hey ${message.author.username}!`)
-                    .setDescription(`
-** »Dit is het formaat voor uw appeal. Wanneer u in appeal gaat, verwachten we dat u al deze vragen zult beantwoorden. «** \n \n
-- Wat is de naam van uw Minecraft IGN? \n- Waarom was u gemuted op ForestMC? \n- Wie heeft u gemuted, Als je het niet weet laat je het leeg)? \n- Als u gemuted bent voor meerdere keren, waarom zouden we u dan unmuten? \n- Heeft u ooit gedoneerd op de server, zo ja, wat heeft u gekocht? \n- Hebt u ooit eerder gestraft op de server? \n- Bent u ooit eerder personeel op de server geweest, zo ja, in welke rang was u? \n- Is er nog iets dat we moeten weten? \n
-                    `)
-                    .setTimestamp()
-                    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
-                channel.send({embed: appealthree});
-            }
+        c.overwritePermissions(role, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
         });
-    }
 
+        c.overwritePermissions(role2, {
+            SEND_MESSAGES: false,
+            READ_MESSAGES: false
+        });
 
-    if (!sort) {
-        return message.reply("Verkeerde usage: -appeal [appeal category]");
-    } else {
-        let channel = message.guild.channels.find(`name`, `appeal-${message.author.username.toLowerCase()}`);
-        if (channel) {
-            return message.reply("There's already an appeal channel opened by you.");
-        } else {
-            createChannel();
+        c.overwritePermissions(message.author, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
+        });
+
+        let logs = message.guild.channels.find(`name`, "logs");
+        if(!logs){
+            logs = message.guild.createChannel("logs", "text");
         }
-    }
 
+
+        let logsembed = new Discord.RichEmbed()
+        .setColor("#ffffff")
+        .addField(`Discord Console`,`${message.author} created a appeal ticket!\nTicket: ${c}`)
+        .setTimestamp()
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
+
+        let tcreateembed = new Discord.RichEmbed()
+        .setTitle("Limit Ticket")
+        .setColor(`#ffffff`)
+        .addField(`New Ticket`,`${c}`)
+        .addField(`How to go to my appeal ticket?`, `Click on ${c}`)
+        .setTimestamp()
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
+      
+        logs.send(logsembed)
+        message.channel.send({embed: tcreateembed});
+
+        const embed = new Discord.RichEmbed()
+        .setColor(`#ffffff`)
+        .addField(`Hey ${message.author.username}!`, `Embed for appeal ticket!`)
+        .setTimestamp()
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
+        c.send({ embed: embed });
+
+
+    })
+
+
+
+}
 }
 
 module.exports.help = {
-    name: "appeal"
+	name: "appeal"
 }
