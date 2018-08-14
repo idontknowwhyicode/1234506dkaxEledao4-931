@@ -33,7 +33,6 @@ bot.on("ready", async () => {
 	
 })
 
-    let aut = message.author;
     if (!message.content.startsWith(prefix)) return
 
 
