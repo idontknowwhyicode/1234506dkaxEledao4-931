@@ -53,7 +53,7 @@ module.exports.run = async (bot, message, args) => {
 
         let logsembed = new Discord.RichEmbed()
         .setColor("#ffffff")
-        .addField(`Discord Console`,`${message.author} created a ticket!`)
+        .addField(`Discord Console`,`${message.author} created a ticket!\nTicket: ticket-${message.author}`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
 
