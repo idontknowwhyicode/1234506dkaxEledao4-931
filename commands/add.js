@@ -3,17 +3,17 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
-    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("report-") || cName.startsWith("help-")) {
+    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
 
         let user = message.mentions.users.first();
         if(user) {
 
             let addembed = new Discord.RichEmbed()
-            .setTitle("Speler Toegevoegd!")
+            .setTitle("✅ User Added!")
             .setColor("#ffffff")
-            .setDescription(`Naam: ${user}`)
+            .setDescription(`Player name: ${user}`)
             .setTimestamp()
-            .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
+            .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
             message.delete()
             message.channel.send({embed: addembed});
 
@@ -21,8 +21,8 @@ module.exports.run = async (bot, message, args) => {
             SEND_MESSAGES: true,
             READ_MESSAGES: true
         });
-} else message.channel.send("Graag een speler taggen!");
-      } else message.reply("Dit werkt alleen in tickets channels.");
+} else message.channel.send("Tag a user: _example: -add Jimmyy#7622_!");
+      } else message.reply("You can only add players in tickets.");
 
 }
 
