@@ -5,8 +5,8 @@ const Discord = require("discord.js")
 module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
-    if(!cName.startsWith("support")) { 
-        message.reply("Alleen in <#448932698107674644> -help gebruiken aub!")
+    if(!cName.startsWith("editthis")) { 
+        message.reply("You can't use -new here!")
         .then(msg => {
             msg.delete(5000)
           })
@@ -14,19 +14,19 @@ module.exports.run = async (bot, message, args) => {
     if(cName.startsWith("support")) {
 
     const reason = message.content.split(" ").slice(1).join(" ");
-    if (message.guild.channels.exists("name", `help-${message.author.username.toLowerCase()}`)) return message.channel.send(`Je hebt momenteel al een ticket open`);
+    if (message.guild.channels.exists("name", `ticket-${message.author.username.toLowerCase()}`)) return message.channel.send(`You already have a ticket open`);
 
-    message.guild.createChannel(`help-${message.author.username}`, "text").then(c => {
+    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
         let category = message.guild.channels.find("name", "🎫 Tickets");
         if(category) {
             c.setParent(category)
              .then(updated => console.log(`Set the category of ${channel.name} to ${channel.parent.name}`))
             .catch(console.error);
-           } else message.reply("Category niet vindbaar.")
+           } else message.reply("Category not able to find.")
            .then(msg => {
             msg.delete(5000)
           })
-        let role = message.guild.roles.find("name", "Forest Support");
+        let role = message.guild.roles.find("name", "editrolenamehere");
         let role2 = message.guild.roles.find("name", "@everyone");
 
 
@@ -45,33 +45,24 @@ module.exports.run = async (bot, message, args) => {
             READ_MESSAGES: true
         });
 
-        let logs = message.guild.channels.find(`name`, "logs");
-        if(!logs){
-            logs = message.guild.createChannel("logs", "text");
-        }
 
-        let logsembed = new Discord.RichEmbed()
-        .setColor("#ffffff")
-        .addField(`Discord Console`,`${message.author} heeft een verboden woord(en) gebruikt!`)
-        .setTimestamp()
-        .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
 
         let tcreateembed = new Discord.RichEmbed()
-        .setTitle("ForestMC Ticket")
+        .setTitle("Limit Ticket")
         .setColor(`#ffffff`)
-        .addField(`Support Ticket`,`${c}`)
-        .addField(`Hoe ga ik naar mijn support ticket?`, `Klik op ${c}`)
+        .addField(`New Ticket`,`${c}`)
+        .addField(`How to go to ticket`, `Click on ${c}`)
         .setTimestamp()
-        .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png")
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
       
         logs.send(logsembed)
         message.channel.send({embed: tcreateembed});
 
         const embed = new Discord.RichEmbed()
         .setColor(`#ffffff`)
-        .addField(`Hey ${message.author.username}!`, `Graag uw vraag stellen zodat wij z.s.m. kunnen antwoorden!`)
+        .addField(`Hey ${message.author.username}!`, `edit this.`)
         .setTimestamp()
-        .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png")
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
         c.send({ embed: embed });
 
 
@@ -83,5 +74,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "help"
+	name: "new"
 }
