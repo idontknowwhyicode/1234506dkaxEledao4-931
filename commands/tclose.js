@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+let prefix = botconfig.prefix
 
 
 
