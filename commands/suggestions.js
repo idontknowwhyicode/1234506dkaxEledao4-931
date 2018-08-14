@@ -13,22 +13,13 @@ module.exports.run = async (bot, message, args) => {
     .setTimestamp()
     .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
 	
-    let suggestions = message.guild.channels.find("name", "suggestions");
+    let suggestions = message.guild.channels.find("name", "poll");
 
     message.delete()
     suggestions.sendEmbed(suggestionEmbed).then(async function (message) {
-		await message.react("✅")
-		await message.react("❌")
+		await message.react("1️⃣")
+		await message.react("2️⃣")
     }).catch(function() {})
-
-    let logs = message.guild.channels.find("name", "logs");
-    let embed = new Discord.RichEmbed()
-    .setColor("#ffffff")
-    .addField('Discord Console', `${message.author} heeft een nieuwe suggestie gemaakt!`)
-    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png")
-    .setTimestamp();
-
-    logs.sendEmbed(embed);
 
 };
 
