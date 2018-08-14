@@ -32,6 +32,7 @@ bot.on("ready", async () => {
 	bot.user.setActivity("play.forestmc.nl", {type: "PLAYING"});
 	
 })
+bot.on("message", async message => {
 
     if (!message.content.startsWith(prefix)) return
 
@@ -41,5 +42,5 @@ bot.on("ready", async () => {
 	let args = messageArray.slice(1)
 	let commandFile = bot.commands.get(cmd.slice(prefix.length))
     if(commandFile) commandFile.run(bot, message, args)
-
+})
 bot.login(process.env.BOT_TOKEN);
