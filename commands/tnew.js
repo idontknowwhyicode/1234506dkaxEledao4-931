@@ -5,13 +5,13 @@ const Discord = require("discord.js")
 module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
-    if(!cName.startsWith("editthis")) { 
+    if(!cName.startsWith("commands")) { 
         message.reply("You can't use -new here!")
         .then(msg => {
             msg.delete(5000)
           })
     }
-    if(cName.startsWith("editthis")) {
+    if(cName.startsWith("commands")) {
 
     const reason = message.content.split(" ").slice(1).join(" ");
     if (message.guild.channels.exists("name", `ticket-${message.author.username.toLowerCase()}`)) return message.channel.send(`You already have a ticket open`);
@@ -45,13 +45,23 @@ module.exports.run = async (bot, message, args) => {
             READ_MESSAGES: true
         });
 
+        let logs = message.guild.channels.find(`name`, "logs");
+        if(!logs){
+            logs = message.guild.createChannel("logs", "text");
+        }
 
+
+        let logsembed = new Discord.RichEmbed()
+        .setColor("#ffffff")
+        .addField(`Discord Console`,`${message.author} created a ticket!`)
+        .setTimestamp()
+        .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
 
         let tcreateembed = new Discord.RichEmbed()
         .setTitle("Limit Ticket")
         .setColor(`#ffffff`)
         .addField(`New Ticket`,`${c}`)
-        .addField(`How to go to ticket`, `Click on ${c}`)
+        .addField(`How to go to my ticket?`, `Click on ${c}`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
       
@@ -60,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
 
         const embed = new Discord.RichEmbed()
         .setColor(`#ffffff`)
-        .addField(`Hey ${message.author.username}!`, `edit this.`)
+        .addField(`Hey ${message.author.username}!`, `Embed for ticket!`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
         c.send({ embed: embed });
