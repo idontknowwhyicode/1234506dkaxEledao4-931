@@ -5,7 +5,7 @@ let prefix = "-"
 
 module.exports.run = async (bot, message, args) => {
     if (isCommand(message, "close")) {
-        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+        if (!message.channel.name.startsWith(`ticket-`) || !message.channel.name.startsWith(`appeal-`) || !message.channel.name.startsWith(`apply-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
             .then((m) => {
