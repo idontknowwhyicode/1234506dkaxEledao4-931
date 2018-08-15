@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
                         message.channel.delete();
                         let logsembed = new Discord.RichEmbed()
                         .setColor("#ffffff")
-                        .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: ${c}`)
+                        .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: #${cName}`)
                         .setTimestamp()
                         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
                         logs.send(logsembed)
