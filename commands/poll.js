@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-   let derp = message.content.split(" ").slice(1).join(" ").split('|')
+   let derp = args.join(" ").split("|");
    if(!args[0]) return message.reply(`-poll "This is a poll?" "1" "2"`);
     
 
