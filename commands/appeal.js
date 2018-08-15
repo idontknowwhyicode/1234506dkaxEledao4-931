@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
 
     if (message.guild.channels.exists("name", `appeal-${message.author.username.toLowerCase()}`)) return message.channel.send(`You already have a ticket open`);
 
-    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+    message.guild.createChannel(`appeal-${message.author.username}`, "text").then(c => {
         let category = message.guild.channels.find("name", "🎫 Tickets");
         if(category) {
             c.setParent(category)
