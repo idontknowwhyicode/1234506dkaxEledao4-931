@@ -16,8 +16,8 @@ module.exports.run = async (bot, message, args) => {
 	
     poll.send(`📊**` + polls[0] + `**`)
     poll.send(pollEmbed).then(async function (message) {
-		await message.react(":one:")
-		await message.react(":two:")
+		await message.react("✅")
+		await message.react("✅")
     }).catch(function() {})
 };
 
