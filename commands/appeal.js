@@ -44,7 +44,7 @@ module.exports.run = async (bot, message, args) => {
             READ_MESSAGES: true
         });
 
-        let logs = message.guild.channels.find(`name`, "logs");
+        let logs =message.guild.channels.find(c => c.name === "logs");
         if(!logs){
             logs = message.guild.createChannel("logs", "text");
         }
