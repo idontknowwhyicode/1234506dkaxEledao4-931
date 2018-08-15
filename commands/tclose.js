@@ -7,6 +7,7 @@ module.exports.run = async (bot, message, args) => {
     if (isCommand(message, "close")) {
     let channel = message.channel;
     let cName = channel.name;
+	    let logs = message.guild.channels.find(`name`, "logs");
     if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
@@ -18,7 +19,6 @@ module.exports.run = async (bot, message, args) => {
                     })
                     .then((collected) => {
                         message.channel.delete(); {
-				                        let logs = message.guild.channels.find(`name`, "logs");
                         if(!logs){
                             logs = message.guild.createChannel("logs", "text");
                         }
