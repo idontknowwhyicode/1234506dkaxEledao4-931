@@ -1,20 +1,21 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
+	
+   let poll = message.guild.channels.find("name", "poll");
 
    let polls = args.join(" ").split("|");
    if(!args[0]) return message.channel.send(`-poll "This is a poll?" "1" "2"`);
     
 
     let pollEmbed = new Discord.RichEmbed()
-    .addField("Limit Poll", `:one: + polls[1]` , `:two:  + polls[2]`)
+    .addField("Limit Poll\n:one: + polls[1]\n:two: + polls[2]", `lol`)
     .setColor("#ffffff")
     .setTimestamp()
     .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
 	
-    let poll = message.guild.channels.find("name", "poll");
     poll.send(`📊**` + polls[0] + `**`)
-    poll.sendEmbed(pollEmbed).then(async function (message) {
+    poll.send(pollEmbed).then(async function (message) {
 		await message.react("1️⃣")
 		await message.react("2️⃣")
     }).catch(function() {})
