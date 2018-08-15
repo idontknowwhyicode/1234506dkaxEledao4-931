@@ -18,18 +18,13 @@ module.exports.run = async (bot, message, args) => {
                         errors: ['time'],
                     })
                     .then((collected) => {
-                        message.channel.delete(); {
-                        if(!logs){
-                            logs = message.guild.createChannel("logs", "text");
-                        }
-                
-                
+                        message.channel.delete();
                         let logsembed = new Discord.RichEmbed()
                         .setColor("#ffffff")
                         .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: ${cName}`)
                         .setTimestamp()
                         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
-			}
+                        logs.send(logsembed)
                     })
                     .catch(() => {
                         m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
