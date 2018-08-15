@@ -2,25 +2,26 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-   let polllol = args.join(" ").split(' " ');
-  if(!args[0]) return message.channel.send(`-poll "This is a poll?" "1" "2"`);
-
-    let pollEmbed = new Discord.RichEmbed()
-    .setDescription(`📊` + args[0])
-    .addField(`1️⃣ + ${args[1]}`, `lol`)
-    .setColor("#ffffff")
-    .setTimestamp()
-    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
-	
-    let poll = message.guild.channels.find("name", "poll");
-
-    message.delete()
-    poll.sendEmbed(pollEmbed).then(async function (message) {
-		await message.react("1️⃣")
-		await message.react("2️⃣")
-    }).catch(function() {})
-
-};
+  if (!message.member.hasPermission('MANAGE_GUILD') && message.author.id !== '357555941215961099') return message.channels.send('Sorry, you don\'t have permission to create poll!').then(msg => msg.delete({timeout: 10000}));
+  if (!args.join(' ')) return message.channel.send('Usage: poll <title>').then(msg => msg.delete({timeout: 10000}));
+  
+  const embed = new Discord.MessageEmbed()
+    .setTitle(args.join(' '))
+    .setFooter('React to vote on Poll!')
+    .setColor('#7289DA')
+    const pollTitle = await message.channel.send({ embed });
+      await pollTitle.react(`ðŸ‘`);
+      await pollTitle.react(`ðŸ‘Ž`);
+  
+    const filter = (reaction) => reaction.emoji.name === 'ðŸ‘';
+    const collector = pollTitle.createReactionCollector(filter, { time: 15000 });
+      collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
+      collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+  
+    const filter1 = (reaction) => reaction.emoji.name === 'ðŸ‘Ž';
+    const collector1 = pollTitle.createReactionCollector(filter1, { time: 15000 });
+      collector1.on('collect', r => console.log(`Collected ${r.emoji.name}`));
+      collector1.on('end', collected => console.log(`Collected ${collected.size} items`));
 
 
 module.exports.help = {
