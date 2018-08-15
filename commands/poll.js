@@ -7,7 +7,6 @@ module.exports.run = async (bot, message, args) => {
     
 
     let pollEmbed = new Discord.RichEmbed()
-    .setDescription(`📊` + polls[0])
     .addField(`:one:  ` + polls[1], `:two: ` + polls[2])
     .setColor("#ffffff")
     .setTimestamp()
