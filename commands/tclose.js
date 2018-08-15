@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
                         errors: ['time'],
                     })
                     .then((collected) => {
-                        message.channel.delete() {
+                        message.channel.delete(); {
 				                        let logs = message.guild.channels.find(`name`, "logs");
                         if(!logs){
                             logs = message.guild.createChannel("logs", "text");
