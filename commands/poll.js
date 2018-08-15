@@ -2,13 +2,13 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-   let derp = args.join(" ").split("|");
+   let polls = args.join(" ").split("|");
    if(!args[0]) return message.reply(`-poll "This is a poll?" "1" "2"`);
     
 
     let pollEmbed = new Discord.RichEmbed()
-    .setDescription(`📊` + args[0])
-    .addField(`:one:  ` + args[1], `:two: ` + args[2])
+    .setDescription(`📊` + polls[0])
+    .addField(`:one:  ` + polls[1], `:two: ` + polls[2])
     .setColor("#ffffff")
     .setTimestamp()
     .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
