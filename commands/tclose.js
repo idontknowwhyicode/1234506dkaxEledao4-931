@@ -17,9 +17,8 @@ module.exports.run = async (bot, message, args) => {
                         errors: ['time'],
                     })
                     .then((collected) => {
-                        message.channel.delete();
-
-                        let logs = message.guild.channels.find(`name`, "logs");
+                        message.channel.delete() {
+				                        let logs = message.guild.channels.find(`name`, "logs");
                         if(!logs){
                             logs = message.guild.createChannel("logs", "text");
                         }
@@ -30,6 +29,7 @@ module.exports.run = async (bot, message, args) => {
                         .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: ${cName}`)
                         .setTimestamp()
                         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
+			}
                     })
                     .catch(() => {
                         m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
