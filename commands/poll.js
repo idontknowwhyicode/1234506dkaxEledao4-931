@@ -3,10 +3,10 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
 
    let polllol = args.join(" ").split("|").slice(3);
-  if(!args[0]) return message.channel.send(`-poll "This is a poll?" "1" "2"`);
-
+   if(!args[0]) return message.reply(`-poll "This is a poll?" "1" "2"`);
+    
+    message.reply(`📊` + args[0]);
     let pollEmbed = new Discord.RichEmbed()
-    .setDescription(`📊` + args[0])
     .addField(`:one:  ` + args[1], `:two: ` + args[2])
     .setColor("#ffffff")
     .setTimestamp()
