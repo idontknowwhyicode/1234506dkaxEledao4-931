@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 
-   let poll = args.join(" ").split(' " ');
+   let args = args.join(" ").split(' " ');
   if(!args[0]) return message.channel.send(`-poll "This is a poll?" "1" "2"`);
 
     let pollEmbed = new Discord.RichEmbed()
