@@ -5,7 +5,7 @@ module.exports.run = async (bot, message, args) => {
    let polllol = args.join(" ").split("|").slice(3);
    if(!args[0]) return message.reply(`-poll "This is a poll?" "1" "2"`);
     
-    message.reply(`📊` + args[0]);
+    message.channel.send(`📊` + args[0]){
     let pollEmbed = new Discord.RichEmbed()
     .addField(`:one:  ` + args[1], `:two: ` + args[2])
     .setColor("#ffffff")
@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
 		await message.react("1️⃣")
 		await message.react("2️⃣")
     }).catch(function() {})
-
+    }
 };
 
 
