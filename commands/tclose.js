@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     if (isCommand(message, "close")) {
     let channel = message.channel;
     let cName = channel.name;
-	    let logs = message.guild.channels.find(`name`, "logs");
+    let message.guild.channels.find(c => c.name === "logs")
     if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
                         message.channel.delete();
                         let logsembed = new Discord.RichEmbed()
                         .setColor("#ffffff")
-                        .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: ${cName}`)
+                        .addField(`Discord Console`,`${message.author} closed a ticket!\nTicket: ${c}`)
                         .setTimestamp()
                         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
                         logs.send(logsembed)
