@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
     .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
 	
     let poll = message.guild.channels.find("name", "poll");
-    message.channel.send(`📊` + polls[0]);
+    poll.send(`📊` + polls[0]);
     poll.sendEmbed(pollEmbed).then(async function (message) {
 		await message.react("1️⃣")
 		await message.react("2️⃣")
