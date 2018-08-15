@@ -9,16 +9,15 @@ module.exports.run = async (bot, message, args) => {
     
 
     let pollEmbed = new Discord.RichEmbed()
-    .addField(`\n:one:  ` + polls[1], `:two: ` + polls[2])
     .setDescription(`:one: ` + polls[1] + `\n:two: ` + polls[2])
     .setColor("#ffffff")
     .setTimestamp()
-    .setFooter(`© ForestMC`, "https://imgur.com/tfBmDbI.png");
+    .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png");
 	
     poll.send(`📊**` + polls[0] + `**`)
     poll.send(pollEmbed).then(async function (message) {
-		await message.react("1️⃣")
-		await message.react("2️⃣")
+		await message.react(":one:")
+		await message.react(":two:")
     }).catch(function() {})
 };
 
