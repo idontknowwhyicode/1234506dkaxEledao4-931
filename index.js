@@ -29,7 +29,7 @@ fs.readdir("./commands/", (err, files) => {
 process.on("error", console.error)
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is now online!`)
-	bot.user.setActivity("Made by Jimmy", {type: "PLAYING"});
+	bot.user.setActivity("do -help | store.limit.rip", {type: "PLAYING"});
 	
 })
 bot.on("message", async message => {
