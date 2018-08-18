@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
            .then(msg => {
             msg.delete(5000)
           })
-        let role = message.guild.roles.find("name", "editrolenamehere");
+        let role = message.guild.roles.find("name", "@Appeal Team");
         let role2 = message.guild.roles.find("name", "@everyone");
 
 
@@ -69,7 +69,7 @@ module.exports.run = async (bot, message, args) => {
 
         const embed = new Discord.RichEmbed()
         .setColor(`#ffffff`)
-        .addField(`Hey ${message.author.username}!`, `Embed for appeal ticket!`)
+        .addField(`Hey ${message.author.username}!`, `Dear, ${message.author}\n\nThank you for reaching out to our appeal team!\nPlease appeal using the following format:\n\nWhat is your IGN? »\nWhy were you punished? »\nWho punished you? »\nWhy should we remove or reduce your punishment? »\nAny proof? »\n`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
         c.send({ embed: embed });
