@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
            .then(msg => {
             msg.delete(5000)
           })
-        let role = message.guild.roles.find("name", "editrolenamehere");
+        let role = message.guild.roles.find("name", "Support Team");
         let role2 = message.guild.roles.find("name", "@everyone");
 
 
@@ -61,7 +61,7 @@ module.exports.run = async (bot, message, args) => {
         .setTitle("Limit Ticket")
         .setColor(`#ffffff`)
         .addField(`New Ticket`,`${c}`)
-        .addField(`How to go to my ticket?`, `Click on ${c}`)
+        .addField(`How do I go to my ticket?`, `Click on ${c}`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
       
@@ -70,7 +70,7 @@ module.exports.run = async (bot, message, args) => {
 
         const embed = new Discord.RichEmbed()
         .setColor(`#ffffff`)
-        .addField(`Hey ${message.author.username}!`, `Embed for ticket!`)
+        .addField(`Hey ${message.author.username}!`, `Dear, ${message.author} \n\nThank you for reaching out to our support team! \nWe will get back to you as soon as possible.`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
         c.send({ embed: embed });
