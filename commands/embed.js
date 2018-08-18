@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Yeah, that isn't going to happen.");
   let embedmessage = args.join(" ");
   let embedEmbed = new Discord.RichEmbed()
-  .setColor("#00FFFF")
+  .setColor("#FFFFFF")
   .setDescription(embedmessage);
   message.delete().catch();
   message.channel.send(embedEmbed);
