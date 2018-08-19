@@ -5,10 +5,10 @@ module.exports.run = async (bot, message, args) => {
 
     let member = msg.mentions.members.first();
     if(!member) {
-        msg.channel.send('Please mention a valid user.')
+        message.channel.send('Please mention a valid user.')
     }
 
-    msg.channel.send({
+    message.channel.send({
         embed: {
             "title": "**User Stats**",
             "color": 16753920,
