@@ -1,5 +1,7 @@
-﻿var moment = require("moment")
-exports.run = (client, msg, args) => {
+const Discord = require("discord.js");
+const botconfig = require("../botconfig.json");
+
+module.exports.run = async (bot, message, args) => {
 
     let member = msg.mentions.members.first();
     if(!member) {
