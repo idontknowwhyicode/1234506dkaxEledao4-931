@@ -43,4 +43,4 @@ bot.on("message", async message => {
 	let commandFile = bot.commands.get(cmd.slice(prefix.length))
     if(commandFile) commandFile.run(bot, message, args)
 })
-bot.login(process.env.BOT_TOKEN);
+bot.login(process.env.NDc5NTUwMjc1OTYzODQ2NjY3.DlqI5w.FYfoYQQXpPDWKa_LNPG5gMo14DE);
