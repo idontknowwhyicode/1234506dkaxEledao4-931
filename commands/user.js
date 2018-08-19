@@ -47,6 +47,11 @@ exports.run = (client, msg, args) => {
                     "inline": true
                 }
             ]
+            
         }
     });
+}
+
+module.exports.help = {
+    name: "info"
 }
