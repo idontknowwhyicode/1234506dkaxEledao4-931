@@ -3,7 +3,7 @@ const botconfig = require("../botconfig.json");
 
 module.exports.run = async (bot, message, args) => {
 
-    let member = msg.mentions.members.first();
+    let member = message.mentions.members.first();
     if(!member) {
         message.channel.send('Please mention a valid user.')
     }
