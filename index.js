@@ -48,7 +48,7 @@ client.on("guildMemberAdd", (member) => {
   let role = member.guild.roles.find("name", "Member");
   member.addRole(role)
     .catch(console.log)
-  member.guild.channels.get("440769735596965908").send({
+  member.guild.channels.get("437155032018845697").send({
     embed: {
       "color": 16753920,
       "title": "**New User!**",
