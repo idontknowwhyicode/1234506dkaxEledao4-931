@@ -43,4 +43,20 @@ bot.on("message", async message => {
 	let commandFile = bot.commands.get(cmd.slice(prefix.length))
     if(commandFile) commandFile.run(bot, message, args)
 })
+
+client.on("guildMemberAdd", (member) => {
+  let role = member.guild.roles.find("name", "Member");
+  member.addRole(role)
+    .catch(console.log)
+  member.guild.channels.get("440769735596965908").send({
+    embed: {
+      "color": 16753920,
+      "title": "**New User!**",
+      "description": "         <@" + member.user.id + "> Welcome to » Limit | Network «",
+      "footer": {
+        "text": "© Limit | Network"
+      },
+    }
+  });
+});
 bot.login(process.env.BOT_TOKEN);
