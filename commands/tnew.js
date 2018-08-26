@@ -28,6 +28,7 @@ module.exports.run = async (bot, message, args) => {
           })
         let role = message.guild.roles.find("name", "Support Team");
         let role2 = message.guild.roles.find("name", "@everyone");
+	let role3 = message.guild.roles.find("name", "» Bots");
 
 
         c.overwritePermissions(role, {
@@ -38,6 +39,11 @@ module.exports.run = async (bot, message, args) => {
         c.overwritePermissions(role2, {
             SEND_MESSAGES: false,
             READ_MESSAGES: false
+        });
+	    
+	c.overwritePermissions(role3, {
+            SEND_MESSAGES: false,
+            READ_MESSAGES: true
         });
 
         c.overwritePermissions(message.author, {
