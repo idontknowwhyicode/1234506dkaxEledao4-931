@@ -27,6 +27,7 @@ module.exports.run = async (bot, message, args) => {
           })
         let role = message.guild.roles.find("name", "Appeal Team");
         let role2 = message.guild.roles.find("name", "@everyone");
+	let role3 = message.guild.roles.find("name", "» Bots");
 
 
         c.overwritePermissions(role, {
