@@ -39,6 +39,11 @@ module.exports.run = async (bot, message, args) => {
             SEND_MESSAGES: false,
             READ_MESSAGES: false
         });
+	    
+	c.overwritePermissions(role3, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: false
+        });
 
         c.overwritePermissions(message.author, {
             SEND_MESSAGES: true,
