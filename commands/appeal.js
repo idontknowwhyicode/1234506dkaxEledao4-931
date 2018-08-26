@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
            .then(msg => {
             msg.delete(5000)
           })
-        let role = message.guild.roles.find("name", "@Appeal Team");
+        let role = message.guild.roles.find("name", "Appeal Team");
         let role2 = message.guild.roles.find("name", "@everyone");
 
 
