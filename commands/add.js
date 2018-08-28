@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
-    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
+    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-") || cName.startsWith("suggestion-") || cName.startsWith("management-")) {
 
         let user = message.mentions.users.first();
         if(user) {
