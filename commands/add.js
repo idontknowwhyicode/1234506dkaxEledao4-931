@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
             SEND_MESSAGES: true,
             READ_MESSAGES: true
         });
-} else message.channel.send("Tag a user: _example: -add Jimmyy#7622_!");
+} else message.channel.send("Tag a user: _example: `-add @mack#9928`!");
       } else message.reply("You can only add players in tickets.");
 
 }
