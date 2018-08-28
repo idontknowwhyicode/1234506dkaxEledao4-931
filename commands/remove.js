@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
-    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
+    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")|| cName.startsWith("suggestion-")|| cName.startsWith("management-")) {
 
         let user = message.mentions.users.first();
         if(user) {
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
             SEND_MESSAGES: false,
             READ_MESSAGES: false
         });
-} else message.channel.send("Tag a user: _example: -remove Jimmyy#7622_!");
+} else message.channel.send("Please tag a user! *Example*: `-add @mack#9928`!");
       } else message.reply("You can only remove players in tickets.");
 
 }
