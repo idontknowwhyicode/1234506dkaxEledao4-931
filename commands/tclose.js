@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
     let channel = message.channel;
     let cName = channel.name;
     let logs = message.guild.channels.find(c => c.name === "logs")
-    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-")) {
+    if(cName.startsWith("appeal-") || cName.startsWith("apply-") || cName.startsWith("ticket-") || cName.startsWith("management-") || cName.startsWith("suggestion-")) {
         // Confirm delete - with timeout (Not command)
         message.channel.send(`Are you sure? Once confirmed, you cannot reverse this action!\nTo confirm, type \`-confirm\`. This will time out in 10 seconds and be cancelled.`)
             .then((m) => {
