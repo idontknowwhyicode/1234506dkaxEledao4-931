@@ -1,41 +1,66 @@
-const Social = require("../../structures/Social.js");
-const request = require("snekfetch");
-const HTMLParser = require("fast-html-parser");
-const { MessageEmbed } = require("discord.js");
+const Discord = require("discord.js");
+const color = require("./colors.json");
+const help = require("./helpcommand.js");
 
-class FML extends Social {
-  constructor(...args) {
-    super(...args, {
-      name: "fml",
-      description: "Grabs a random fml story.",
-      usage: "fml",
-      category: "Fun",
-      extended: "This command grabs a random \"fuck my life\" story from fmylife.com and displays it in an organised embed.",
-      cost: 10,
-      cooldown: 10,
-      aliases: ["fuckmylife", "fuckme"],
-      loadingString: "<a:typing:397490442469376001> **Searching** please wait a few moments.",
-      botPerms: ["EMBED_LINKS"]
-    });
-  }
+module.exports.success = (message, msg) => {
+    let embed = new Discord.RichEmbed()
+    .setAuthor("Requested by " + message.author.tag, message.author.avatarURL)
+    .setColor(color.green)
+    .setTitle("Success!")
+    .setDescription(msg)
 
-  async run(message, args, level, loadingMessage) {
-    const { text } = await request.get("http://www.fmylife.com/random");
-    const root = HTMLParser.parse(text);
-    const article = root.querySelector(".block a");
-    const downdoot = root.querySelector(".vote-down");
-    const updoot = root.querySelector(".vote-up");
-    const embed = new MessageEmbed()
-      .setTitle("Fuck my Life, Random Edition!")
-      .setColor(165868)
-      .setThumbnail("http://i.imgur.com/5cMj0fw.png")
-      .setFooter(`Requested by: ${message.member.displayName} | Powered By fmylife.com`)
-      .setDescription(`_${article.childNodes[0].text}\n\n_`)
-      .addField("I agree, your life sucks", updoot.childNodes[0].text, true)
-      .addField("You deserved it:", downdoot.childNodes[0].text, true);
-    if (article.childNodes[0].text.length < 5) throw new this.client.methods.errors.APIError("Today, something went wrong, so you'll have to try again in a few moments. FML", loadingMessage);
-    loadingMessage.edit({ embed });
-  }
+    message.channel.send(embed);
 }
 
-module.exports = FML;
+module.exports.picture = (message, picture) => {
+    let embed = new Discord.RichEmbed()
+    .setAuthor("Requested by " + message.author.tag, message.author.avatarURL)
+    .setColor(color.purple)
+    .setImage(picture)
+
+    message.channel.send(embed);
+}
+
+module.exports.error = (message, error) => {
+    let embed = new Discord.RichEmbed()
+    .setAuthor("Requested by " + message.author.tag, message.author.avatarURL)
+    .setColor(color.red)
+    .setTitle("An error has occured!")
+    .setDescription(error)
+
+    message.channel.send(embed);
+}
+
+module.exports.info = (message, msg) => {
+    let embed = new Discord.RichEmbed()
+    .setAuthor("Requested by " + message.author.tag, message.author.avatarURL)
+    .setColor(color.blue)
+    .setDescription(msg)
+
+    message.channel.send(embed);
+}
+
+module.exports.help = (message, msg) => {
+    let embed = new Discord.RichEmbed()
+    .setAuthor("Requested by " + message.author.tag, message.author.avatarURL)
+    .setTitle("Commands!")
+    .setColor(color.blue)
+
+    .setDescription("Shows commands for the bot!")
+    .addField(":bulb: General commands", 
+    help.command("rainbow", "Rainbow roles!") +
+    help.command("ping", "Displays bot's ping to discord"))
+
+    .addField(":seedling: Animal commands",
+    help.command("cat", "Shows a random cat") +
+    help.command("shibe", "Shows a random shibe") +
+    help.command("dog", "Shows a random dog"))
+
+    .addField(":skull: Bot's owner commands" ,
+    help.command("eval", "Execute code") +
+    help.command("createInvite", "Creates invites for servers"))
+        
+    .setColor(color.blue)
+
+    message.channel.send(embed);
+}
