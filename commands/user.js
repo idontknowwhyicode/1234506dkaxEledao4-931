@@ -1,59 +1,49 @@
 const Discord = require("discord.js");
-const botconfig = require("../botconfig.json");
+const moment = require("moment");
+require("moment-duration-format");
+const status = {
+  online: "Online",
+  idle: "Idle",
+  dnd: "Do Not Disturb",
+  offline: "Offline/Invisible"
+};
+const randomColor = "#000000".replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
+exports.run = (client, msg, args) => {
+  const member = msg.mentions.members.first() || msg.guild.members.get(args[0]) || msg.member;
+  if (!member) return msg.reply("Please provide a vaild Mention or USER ID");
+  let bot;
+  if (member.user.bot === true) {
+    bot = "Yes";
+  } else {
+    bot = "No";
+  }
+  const embed = new Discord.MessageEmbed()
+    .setColor(randomColor)
+    .setThumbnail(`${member.user.displayAvatarURL()}`)
+    .setAuthor(`${member.user.tag} (${member.id})`, `${member.user.avatarURL()}`)
+    .addField("Nickname:", `${member.nickname !== null ? `Nickname: ${member.nickname}` : "No nickname"}`, true)
+    .addField("Bot?", `${bot}`, true)
+    .addField("Guild", `${bot}`, true)
+    .addField("Status", `${status[member.user.presence.status]}`, true)
+    .addField("Playing", `${member.user.presence.game ? `${member.user.presence.game.name}` : "not playing anything."}`, true)
+    .addField("Roles", `${member.roles.filter(r => r.id !== msg.guild.id).map(roles => `\`${roles.name}\``).join(" **|** ") || "No Roles"}`, true)
+    .addField("Joined At", `${moment.utc(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+    .addField("Created At", `${moment.utc(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true);
 
-module.exports.run = async (bot, message, args) => {
+  msg.channel.send({
+    embed
+  });
+};
 
-    let member = message.mentions.members.first();
-    if(!member) {
-        message.channel.send('Please mention a valid user.')
-    }
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["uinfo"],
+  permLevel: 0
+};
 
-    message.channel.send({
-        embed: {
-            "title": "**User Stats**",
-            "color": 16753920,
-            "footer": {
-                "text": "*Version: " + client.package.version + "*"
-            },
-            "thumbnail": {
-                "url": "https://cdn.discordapp.com/attachments/473376205442121728/478875383601823744/Limit.png"
-            },
-            "fields": [{
-                    "name": "Tag:",
-                    "value": member.user.tag,
-                    "inline": true
-                },
-                {
-                    "name": "ID:",
-                    "value": member.id,
-                    "inline": true
-                },
-                {
-                    "name": "Joined Discord:",
-                    "value": moment(member.user.createdAt).format('LLL'),
-                    "inline": true
-                },
-                {
-                    "name": "Status:",
-                    "value": member.presence.status,
-                    "inline": true
-                },
-                //{
-                    //"name": "Roles:",
-                    //"value": msg.member.roles.array().toString(),
-                    //"inline": true
-                //},
-                {
-                    "name": "Joined Server:",
-                    "value": moment(member.joinedAt).format('LLL'),
-                    "inline": true
-                }
-            ]
-            
-        }
-    });
-}
-
-module.exports.help = {
-    name: "userinfo"
-}
+exports.help = {
+  name: "userinfo",
+  description: "Gets userinfo from a mention or id",
+  usage: "userinfo <mention> or <id>"
+};
