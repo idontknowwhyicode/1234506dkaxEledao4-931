@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
         message.channel.overwritePermissions(message.guild.id, {
             SEND_MESSAGES: null
         }).then(() => {
-            message.channel.sendMessage('**Lockdown lifted.**');
+            message.channel.sendMessage('-embed **Lockdown lifted.**');
             clearTimeout(client.lockit[message.channel.id]);
             delete client.lockit[message.channel.id];
         }).catch(error => {
