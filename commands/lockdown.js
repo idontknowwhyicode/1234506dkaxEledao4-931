@@ -3,7 +3,7 @@ exports.run = (client, message, args) => {
     if (!client.lockit) client.lockit = [];
     let time = args.join(' ');
     let validUnlocks = ['release', 'unlock'];
-    let modRole = message.guild.roles.find('name', '» Manager');
+    let modRole = message.guild.roles.find('name', 'Support Team');
     if (!message.member.roles.has(modRole.id)) {
         return message.reply('You have insufficient permissions to use this command.').catch(console.error);
     }
