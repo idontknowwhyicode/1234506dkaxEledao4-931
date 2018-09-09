@@ -69,7 +69,7 @@ module.exports.run = async (bot, message, args) => {
 
         const embed = new Discord.RichEmbed()
         .setColor(`#ffffff`)
-        .addField(`Hey ${message.author.username}!`, `Embed for apply ticket!`)
+        .addField(`Hey ${message.author.username}!`, `**Limit Network**\n http://staff.limit.rip\n **Other Discords:\n Age »\n Past Experience »\n Why should we give you staff? »`)
         .setTimestamp()
         .setFooter(`© Limit`, "https://imgur.com/KOA8OVl.png")
         c.send({ embed: embed });
